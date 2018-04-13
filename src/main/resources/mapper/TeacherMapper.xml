@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.haoguo.mapper.TeacherMapper" >
+  <resultMap id="BaseResultMap" type="com.haoguo.model.Teacher" >
+    <id column="tno" property="tno" jdbcType="VARCHAR" />
+    <result column="tname" property="tname" jdbcType="VARCHAR" />
+    <result column="tsex" property="tsex" jdbcType="VARCHAR" />
+    <result column="tbirthday" property="tbirthday" jdbcType="TIMESTAMP" />
+    <result column="prof" property="prof" jdbcType="VARCHAR" />
+    <result column="depart" property="depart" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <if test="fields == null" >
+      tno, tname, tsex, tbirthday, prof, depart
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.haoguo.model.TeacherExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from teacher
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="startRow != null" >
+      limit #{startRow} , #{pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    tno,tname,tsex,tbirthday,prof,depart
+    from teacher
+    where tno = #{tno,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from teacher
+    where tno = #{tno,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.haoguo.model.TeacherExample" >
+    delete from teacher
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.haoguo.model.Teacher" >
+    insert into teacher (tno, tname, tsex, 
+      tbirthday, prof, depart
+      )
+    values (#{tno,jdbcType=VARCHAR}, #{tname,jdbcType=VARCHAR}, #{tsex,jdbcType=VARCHAR}, 
+      #{tbirthday,jdbcType=TIMESTAMP}, #{prof,jdbcType=VARCHAR}, #{depart,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.haoguo.model.Teacher" >
+    insert into teacher
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="tno != null" >
+        tno,
+      </if>
+      <if test="tname != null" >
+        tname,
+      </if>
+      <if test="tsex != null" >
+        tsex,
+      </if>
+      <if test="tbirthday != null" >
+        tbirthday,
+      </if>
+      <if test="prof != null" >
+        prof,
+      </if>
+      <if test="depart != null" >
+        depart,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="tno != null" >
+        #{tno,jdbcType=VARCHAR},
+      </if>
+      <if test="tname != null" >
+        #{tname,jdbcType=VARCHAR},
+      </if>
+      <if test="tsex != null" >
+        #{tsex,jdbcType=VARCHAR},
+      </if>
+      <if test="tbirthday != null" >
+        #{tbirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prof != null" >
+        #{prof,jdbcType=VARCHAR},
+      </if>
+      <if test="depart != null" >
+        #{depart,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.haoguo.model.TeacherExample" resultType="java.lang.Integer" >
+    select count(*) from teacher
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update teacher
+    <set >
+      <if test="record.tno != null" >
+        tno = #{record.tno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tname != null" >
+        tname = #{record.tname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tsex != null" >
+        tsex = #{record.tsex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tbirthday != null" >
+        tbirthday = #{record.tbirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.prof != null" >
+        prof = #{record.prof,jdbcType=VARCHAR},
+      </if>
+      <if test="record.depart != null" >
+        depart = #{record.depart,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update teacher
+    set tno = #{record.tno,jdbcType=VARCHAR},
+      tname = #{record.tname,jdbcType=VARCHAR},
+      tsex = #{record.tsex,jdbcType=VARCHAR},
+      tbirthday = #{record.tbirthday,jdbcType=TIMESTAMP},
+      prof = #{record.prof,jdbcType=VARCHAR},
+      depart = #{record.depart,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.haoguo.model.Teacher" >
+    update teacher
+    <set >
+      <if test="tname != null" >
+        tname = #{tname,jdbcType=VARCHAR},
+      </if>
+      <if test="tsex != null" >
+        tsex = #{tsex,jdbcType=VARCHAR},
+      </if>
+      <if test="tbirthday != null" >
+        tbirthday = #{tbirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="prof != null" >
+        prof = #{prof,jdbcType=VARCHAR},
+      </if>
+      <if test="depart != null" >
+        depart = #{depart,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where tno = #{tno,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.haoguo.model.Teacher" >
+    update teacher
+    set tname = #{tname,jdbcType=VARCHAR},
+      tsex = #{tsex,jdbcType=VARCHAR},
+      tbirthday = #{tbirthday,jdbcType=TIMESTAMP},
+      prof = #{prof,jdbcType=VARCHAR},
+      depart = #{depart,jdbcType=VARCHAR}
+    where tno = #{tno,jdbcType=VARCHAR}
+  </update>
+</mapper>
