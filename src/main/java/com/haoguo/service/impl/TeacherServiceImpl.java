@@ -1,10 +1,4 @@
-package com.haoguo.service.impl;/**
- * Created with IntelliJ IDEA.
- * Description:
- * User: Administrator
- * Date: 2018-04-13
- * Time: AM 10:48
- */
+package com.haoguo.service.impl;
 
 import com.haoguo.mapper.TeacherMapper;
 import com.haoguo.model.Teacher;
@@ -21,17 +15,18 @@ import java.util.List;
  **/
 @Service
 public class TeacherServiceImpl implements TeacherService {
-    @Autowired
-    TeacherMapper teacherMapper;
-    @Override
-    public List<Teacher> getTeacherDesc() {
+	@Autowired
+	TeacherMapper teacherMapper;
 
-        return teacherMapper.getTeacherDesc();
-    }
+	@Override
+	public List<Teacher> getTeacherDesc() {
 
-    @Override
-    public int insertTeacher(Teacher teacher) {
-        int typenum = teacherMapper.insert(teacher);
-        return typenum;
-    }
+		return teacherMapper.getTeacherDesc();
+	}
+
+	@Override
+	public int insertTeacher(Teacher teacher) {
+		int typenum = teacherMapper.insert(teacher);
+		return typenum;
+	}
 }

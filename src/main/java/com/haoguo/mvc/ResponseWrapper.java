@@ -5,8 +5,7 @@ import lombok.Setter;
 
 /**
  * 
- * @author Administrator
- * 统一数据传输响应
+ * @author Administrator 统一数据传输响应
  */
 @Getter
 @Setter
@@ -42,10 +41,14 @@ public class ResponseWrapper {
 	}
 
 	/**
-	 * @param status 状态
-	 * @param infoCode 响应码
-	 * @param info 响应信息
-	 * @param data 传输数据
+	 * @param status
+	 *            状态
+	 * @param infoCode
+	 *            响应码
+	 * @param info
+	 *            响应信息
+	 * @param data
+	 *            传输数据
 	 */
 	public ResponseWrapper(StatusEnum status, Integer infoCode, String info, Object data) {
 		this.status = status;

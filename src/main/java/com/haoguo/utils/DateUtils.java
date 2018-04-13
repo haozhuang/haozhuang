@@ -33,7 +33,7 @@ public class DateUtils {
 	public String dateNowToStr() {
 		return dateToStr(new Date());
 	}
-	
+
 	public String dateToStr(Date date) {
 		return sdf.format(date);
 	}
